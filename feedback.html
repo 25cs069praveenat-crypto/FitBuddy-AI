@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FitBuddy AI - Feedback</title>
+</head>
+
+<body>
+
+    <h1>FitBuddy AI</h1>
+
+    <h2>User Details</h2>
+
+    <label>Name:</label>
+    <input type="text" id="name" placeholder="Enter your name">
+    <br><br>
+
+    <label>User ID:</label>
+    <input type="text" id="user_id" placeholder="user001">
+    <br><br>
+
+    <label>Age:</label>
+    <input type="number" id="age" placeholder="Enter age">
+    <br><br>
+
+    <label>Weight (kg):</label>
+    <input type="number" id="weight" placeholder="Enter weight">
+    <br><br>
+
+    <label>Fitness Goal:</label>
+    <input type="text" id="fitness_goal"
+           placeholder="Example: General Fitness">
+    <br><br>
+
+    <label>Workout Intensity:</label>
+    <select id="workout_intensity">
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+    </select>
+    <br><br>
+
+    <h2>Feedback</h2>
+
+    <label>Rating:</label>
+    <select id="rating">
+        <option value="Excellent">Excellent</option>
+        <option value="Good">Good</option>
+        <option value="Average">Average</option>
+        <option value="Needs Improvement">Needs Improvement</option>
+    </select>
+    <br><br>
+
+    <label>Your Feedback:</label>
+    <br>
+    <textarea
+        id="feedback"
+        rows="6"
+        cols="40"
+        placeholder="Enter your feedback"></textarea>
+    <br><br>
+
+    <button onclick="submitFeedback()">Submit Feedback</button>
+
+    <p id="result"></p>
+
+    <script>
+        function submitFeedback() {
+
+            const name = document.getElementById("name").value;
+            const feedback =
+                document.getElementById("feedback").value;
+
+            if (!name || !feedback) {
+                document.getElementById("result").textContent =
+                    "Please enter your name and feedback.";
+                return;
+            }
+
+            document.getElementById("result").textContent =
+                "Thank you for your feedback, " + name + "!";
+        }
+    </script>
+
+</body>
+</html>

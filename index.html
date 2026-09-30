@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FitBuddy AI</title>
+</head>
+
+<body>
+
+    <h1>FitBuddy AI</h1>
+    <p>Your AI Fitness Assistant</p>
+
+    <h2>Generate Fitness Plan</h2>
+
+    <label>Name:</label>
+    <input type="text" id="name" placeholder="Enter your name">
+    <br><br>
+
+    <label>User ID:</label>
+    <input type="text" id="user_id" placeholder="Example: user001">
+    <br><br>
+
+    <label>Age:</label>
+    <input type="number" id="age" placeholder="Enter age">
+    <br><br>
+
+    <label>Weight (kg):</label>
+    <input type="number" id="weight" placeholder="Enter weight">
+    <br><br>
+
+    <label>Fitness Goal:</label>
+    <input type="text" id="fitness_goal" placeholder="Example: General Fitness">
+    <br><br>
+
+    <label>Workout Intensity:</label>
+    <select id="workout_intensity">
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+    </select>
+    <br><br>
+
+    <button onclick="generatePlan()">Generate Plan</button>
+
+    <h2>Result</h2>
+    <pre id="result"></pre>
+
+    <script>
+        async function generatePlan() {
+
+            const name = document.getElementById("name").value;
+            const user_id = document.getElementById("user_id").value;
+            const age = document.getElementById("age").value;
+            const weight = document.getElementById("weight").value;
+            const fitness_goal =
+                document.getElementById("fitness_goal").value;
+            const workout_intensity =
+                document.getElementById("workout_intensity").value;
+
+            const response = await fetch("/api/generate-plan", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name: name,
+                    user_id: user_id,
+                    age: Number(age),
+                    weight: Number(weight),
+                    fitness_goal: fitness_goal,
+                    workout_intensity: workout_intensity
+                })
+            });
+
+            const data = await response.json();
+
+            document.getElementById("result").textContent =
+                data.plan || JSON.stringify(data);
+        }
+    </script>
+
+</body>
+</html>
